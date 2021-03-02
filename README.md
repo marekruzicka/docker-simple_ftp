@@ -1,7 +1,7 @@
 # docker-simple_ftp - docker container running pyftpdlib
 This is not meant to be full-fledged FTP server, just a simple docker container, you run, when you need to get new firmware to a switch/filer/bridge, or any other device.
 It should be started when needed and stopped after it has been used.  
-If you need a real ftp server (something to run non-stop, and be used by multiple users) **use something that does not provide credentials as environment variables**.
+If you need a real ftp server (to run non-stop, be used by multiple users, etc.) **use something that does not provide credentials as environment variables**.
 
 ## General info:
 Wrapper script 'FTP.sh' is provided to quickly start the service, set the user/pass, provide location for data and stop/remove the container.  
@@ -12,6 +12,8 @@ Container is run with `--net=host`  and ftp server is running in passive mode wh
 If you don't want to run 'host based networking' you can play with publishing ports to the container, but unless you want to run in active mode only, it is rather PITA... still possible though.
 
 ## USAGE
+Clone it `git clone https://github.com/marekruzicka/docker-simple_ftp.git`, build it `./build.sh`, run it `./FTP.sh start`.
+
 ### quick run with default settings:
 ```
 user@server:/tmp# FTP.sh start
