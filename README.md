@@ -59,6 +59,6 @@ docker run -d --rm --net=host --name simple_ftp \
 # WORK in PROGRESS
 
 ## credits:
-Idea comes from - https://github.com/mauler/docker-simple-ftp-server
+Idea comes from - https://github.com/mauler/docker-simple-ftp-server  
 Most of the really relevant stuff - https://github.com/giampaolo/pyftpdlib
 
