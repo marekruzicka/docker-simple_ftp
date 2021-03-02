@@ -1,0 +1,51 @@
+stages:
+  - pre_cleanup
+  - build
+  - test
+  - upload
+  - cleanup
+
+
+# 1. let's try to make sure there is clean environment before we start
+# all commands may fail, since we expect the environment to be clean in the first place
+# Add any prerequisites for your workflow here (eg. install packages required for testing)
+pre_cleanup:
+  script: 
+   - . .gitlab-ci.config || true
+   - docker stop $APP_NAME || true
+   - docker rm -f $APP_NAME || true
+   - docker images | grep $APP_NAME | awk '{ print $3}' | xargs docker rmi -f || true
+  stage: pre_cleanup
+  tags:
+   - docker
+
+# 2. build the container
+build:
+  script: "bash -x build.sh"
+  stage: build
+  tags:
+   - docker
+
+# 3. run and test the container
+test:
+  script: "bash -x test.sh"
+  stage: test
+  tags:
+   - docker
+
+# 4. upload the container to the registry
+upload:
+  script:
+    - "bash -x upload.sh"
+  stage: upload
+  tags:
+    - docker
+
+# 5. cleanup after successful run
+# Cleanup anything you might have added into the step 1.
+cleanup:
+  script:
+    - "bash -x cleanup.sh --remove"
+  stage: cleanup
+  tags:
+   - docker
