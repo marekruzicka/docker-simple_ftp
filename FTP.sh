@@ -17,7 +17,7 @@ show_settings() {
   FTP server is running with following settings:\n
 \tUser: $FTP_USER
 \tPass: $FTP_PASS
-\tSocket: 0.0.0.0:$FTP_PORT
+\tListening on: 0.0.0.0:$FTP_PORT
 \tServing directory: $FTP_DIR
 "
 }
@@ -50,7 +50,7 @@ start() {
 stop() {
   if [[ $# -eq 0 ]]; then
     echo -e "\n  Stopping and removing all simple_ftp instances\n"
-    docker ps -aq --filter "name=ftp-" | xargs docker stop
+    docker ps -aq --filter "name=simple_ftp-" | xargs docker stop
   else
     echo -e "\n  Stopping and removing container(s): $@\n" 
     docker stop $@
