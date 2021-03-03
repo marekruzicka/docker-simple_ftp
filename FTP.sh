@@ -2,8 +2,34 @@
 
 
 help() {
-  -
+        echo -e "
+  `basename $0` is used to manage FTP server (running in docker container).
+  You can start the container directly using docker CLI, but why would you?\n
+\tUSAGE:\n\033[1m\t\t`basename $0` [ option ] [ <parameter> ] \033[0m\n
+\t<options>
+\t\t-h | --help | help\tDisplay this help
+\t\tstart [-i]\t\tStart simple_ftp.
+\t\tstop [<name>]\t\tStop all or particular instance.
+\t\tstatus\t\t\tList current simple_ftp instances. (running and stopped).\n
+
+\tEXAMPLES:
+\033[1m\t\t`basename $0` start\033[0m
+\t\t  Start FTP server with default user/pass/port serving current directory\n
+\033[1m\t\t`basename $0` start -i\033[0m
+\t\t  Start FTP server in interactive mode
+\t\t  It will ask you to set user/pass/port/dirctory\n
+\033[1m\t\t`basename $0` status\033[0m
+\t\t  Show running simple_ftp instances (filtered docker ps)\n
+\033[1m\t\t`basename $0` stop\033[0m
+\t\t  Stop and remove all simple_ftp instances\n
+\033[1m\t\t`basename $0` stop <name>\033[0m
+\t\t  Stop only provided simple_ftp instance
+\t\t  Use `basename $0` status to get names\n
+
+Use https://github.com/marekruzicka/docker-simple_ftp to report bugs, or check for updates.
+"
 }
+
 
 settings() {
   read -p "Set FTP directory [$PWD]: " FTP_DIR
@@ -64,7 +90,7 @@ status() {
 
 
 case $1 in
-  help | -h | --help)
+  help | -h | --help | "")
     help
     exit 0;;
   start)
