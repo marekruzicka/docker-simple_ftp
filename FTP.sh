@@ -7,7 +7,7 @@ help() {
   You can start the container directly using docker CLI, but why would you?\n
 \tUSAGE:\n\033[1m\t\t`basename $0` [ option ] [ <parameter> ] \033[0m\n
 \t<options>
-\t\t-h | --help | help\tDisplay this help
+\t\t-h | --help | help | ?\tDisplay this help
 \t\tstart [-i]\t\tStart simple_ftp.
 \t\tstop [<name>]\t\tStop all or particular instance.
 \t\tstatus\t\t\tList current simple_ftp instances. (running and stopped).\n
@@ -85,12 +85,12 @@ stop() {
 
 
 status() {
-  docker ps -a
+  docker ps -a --filter "name=simple_ftp-"
 }
 
 
 case $1 in
-  help | -h | --help | "")
+  help | -h | --help | "" | '?')
     help
     exit 0;;
   start)
