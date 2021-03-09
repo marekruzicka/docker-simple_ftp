@@ -23,10 +23,10 @@ help() {
 \033[1m\t\t`basename $0` stop\033[0m
 \t\t  Stop and remove your simple_ftp instance\n
 \033[1m\t\t`basename $0` stop <name>\033[0m
-\t\t  Stop and remove provided simple_ftp instance\n
+\t\t  Stop and remove provided simple_ftp instance
+\t\t  Use `basename $0` status to get names\n
 \033[1m\t\t`basename $0` stop all\033[0m
 \t\t  Stop and remove all simple_ftp instances\n
-\t\t  Use `basename $0` status to get names\n
 
 Use https://github.com/marekruzicka/docker-simple_ftp to report bugs, or check for updates.
 "
