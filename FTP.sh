@@ -9,7 +9,7 @@ help() {
 \t<options>
 \t\t-h | --help | help | ?\tDisplay this help
 \t\tstart [-i]\t\tStart simple_ftp.
-\t\tstop [<name>]\t\tStop all or particular instance.
+\t\tstop [ all | <name> ]\tStop yours|all|particular instance.
 \t\tstatus\t\t\tList current simple_ftp instances. (running and stopped).\n
 
 \tEXAMPLES:
@@ -21,9 +21,11 @@ help() {
 \033[1m\t\t`basename $0` status\033[0m
 \t\t  Show running simple_ftp instances (filtered docker ps)\n
 \033[1m\t\t`basename $0` stop\033[0m
-\t\t  Stop and remove all simple_ftp instances\n
+\t\t  Stop and remove your simple_ftp instance\n
 \033[1m\t\t`basename $0` stop <name>\033[0m
-\t\t  Stop only provided simple_ftp instance
+\t\t  Stop and remove provided simple_ftp instance\n
+\033[1m\t\t`basename $0` stop all\033[0m
+\t\t  Stop and remove all simple_ftp instances\n
 \t\t  Use `basename $0` status to get names\n
 
 Use https://github.com/marekruzicka/docker-simple_ftp to report bugs, or check for updates.
@@ -75,6 +77,10 @@ start() {
 
 stop() {
   if [[ $# -eq 0 ]]; then
+    echo -e "\n  Stopping and removing your own simple_ftp instance\n"
+    docker stop simple_ftp-$USER
+  elif
+    [[ $1 -eq all ]]; then
     echo -e "\n  Stopping and removing all simple_ftp instances\n"
     docker ps -aq --filter "name=simple_ftp-" | xargs docker stop
   else
